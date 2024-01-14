@@ -118,7 +118,7 @@ namespace EventosDB.MVC.Controllers
             request.AddParameter("token", "gkv5jkjui2kbkmvh");
             request.AddParameter("to", "+258" + guest.Contact);
             request.AddParameter("image", "https://file-example.s3-accelerate.amazonaws.com/images/test.jpg");
-            request.AddParameter("caption", "image Caption");
+            request.AddParameter("caption", "VIVO - EVENTO XYZ \nNovo. \nDois. \n\n VIVO 2024");
 
 
             RestResponse response = await client.ExecuteAsync(request);
