@@ -13,6 +13,12 @@ public partial class Event
 
     public string Description { get; set; } = null!;
 
+    public DateTime CreatedAt { get; set; }
+
+    public string ImageUrl { get; set; } = null!;
+
+    public string Title { get; set; } = null!;
+
     public virtual EventHost EventHost { get; set; } = null!;
 
     public virtual ICollection<Invitation> Invitations { get; set; } = new List<Invitation>();

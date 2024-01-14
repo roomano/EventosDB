@@ -1,4 +1,5 @@
-@model EventosDB.MVC.Data.Guest
+﻿@using EventosDB.MVC.Models
+@model GuestViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -23,14 +24,9 @@
                 <span asp-validation-for="Contact" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UpdatedAt" class="control-label"></label>
-                <input asp-for="UpdatedAt" class="form-control" />
-                <span asp-validation-for="UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DeletedAt" class="control-label"></label>
-                <input asp-for="DeletedAt" class="form-control" />
-                <span asp-validation-for="DeletedAt" class="text-danger"></span>
+                <label asp-for="GuestTypeId" class="control-label"></label>
+                <select asp-for="GuestTypeId" asp-items="ViewBag.GuestTypeId"></select>
+                <span asp-validation-for="GuestTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

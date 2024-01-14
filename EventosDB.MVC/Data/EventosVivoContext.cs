@@ -29,8 +29,13 @@ public partial class EventosVivoContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Events__3214EC078053B3EA");
 
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("Created_at");
             entity.Property(e => e.Dates).HasMaxLength(300);
             entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.Title).HasMaxLength(250);
 
             entity.HasOne(d => d.EventHost).WithMany(p => p.Events)
                 .HasForeignKey(d => d.EventHostId)

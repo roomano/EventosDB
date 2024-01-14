@@ -1,6 +1,16 @@
+-- =============================== START ===============================
+
 CREATE DATABASE EventosVIVO
 GO
 USE EventosVIVO
+
+-- =============================== CREATE ===============================
+
+CREATE TABLE Events(
+Id INT PRIMARY KEY IDENTITY(1,1),
+EventHostId INT NOT NULL,
+Dates NVARCHAR(300) NOT NULL
+)
 
 CREATE TABLE Guests(
 Id INT PRIMARY KEY IDENTITY(2024, 1),
@@ -16,12 +26,6 @@ Id INT PRIMARY KEY IDENTITY(1,1),
 Designation NVARCHAR(250) NOT NULL,
 )
 
-DROP TABLE Event
-CREATE TABLE Events(
-Id INT PRIMARY KEY IDENTITY(1,1),
-EventHostId INT NOT NULL,
-Dates NVARCHAR(300) NOT NULL
-)
 
 CREATE TABLE EventHost(
 Id INT PRIMARY KEY IDENTITY(1,1),
@@ -47,35 +51,50 @@ FOREIGN KEY (EventHostId) REFERENCES EventHost(Id),
 FOREIGN KEY (InvitationTypeId) REFERENCES InvitationType(Id)
 )
 
+-- =============================== DROP ===============================
+
+USE EventosVIVO
+
+DROP TABLE Event
+
+DROP TABLE Guests
+
+-- =============================== ALTER ===============================
+
+USE EventosVIVO
 
 ALTER TABLE Events
 ADD 
  Created_at DATETIME NOT NULL DEFAULT GETDATE()
 	FOREIGN KEY (EventHostId) REFERENCES EventHost(Id)
 
-
-DROP TABLE Guests
-
-USE EventosVIVO
-INSERT INTO Guests(GuestName, Contact) values ('Romano Pedro', '847198930' )
-
-
-USE EventosVIVO
-
-UPDATE Guests
-SET GuestName = 'Ivandro Cariot', Updated_at = GETDATE()
-WHERE Id=2024
-
-ALTER TABLE Guests
+	ALTER TABLE Guests
 ADD 
     GuestTypeId INT NOT NULL DEFAULT 1 
 	FOREIGN KEY (GuestTypeId) REFERENCES GuestType(Id)
 
 ALTER TABLE Events
-ADD 
+ADD
+	Title NVARCHAR(250) NOT NULL
+	ImageUrl NVARCHAR(MAX) NOT NULL
     
 	FOREIGN KEY (EventHostId) REFERENCES EventHost(Id)
 
+-- =============================== INSERT ===============================
+
+USE EventosVIVO
+
+INSERT INTO Guests(GuestName, Contact) values ('Romano Pedro', '847198930' )
+
+-- =============================== UPDATE ===============================
+
+UPDATE Guests
+SET GuestName = 'Ivandro Cariot', Updated_at = GETDATE()
+WHERE Id=2024
+
+-- =============================== SELECT ===============================
+
+USE EventosVIVO
 
 SELECT * FROM GuestType
 SELECT * FROM Guests
@@ -88,9 +107,11 @@ INNER JOIN GuestType ON Guests.GuestTypeId = GuestType.Id
 
 
 
+-- =============================== ENTITYFRAMEWORK CLI COMMANDS ===============================
+-- https://learn.microsoft.com/en-us/ef/core/cli/dotnet
 
 -- dotnet tool install dotnet-ef --versin <VERSION_NUMBER> -g      -para instalar globalmente a ferramenta
 -- dotnet ef dbcontext scaffold "Data Source=.\ITIS;Initial Catalog=EventosVIVO;Persist Security Info=True;User ID=sa;Password=Itis2022;Trust Server Certificate=True" Microsoft.EntityFrameworkCore.SqlServer -o Data -f --no-onconfiguring
 -- dotnet tool install dotnet-aspnet-codegenerator --version 7 -g
---  dotnet aspnet-codegenerator controller -name GuestsController -m Guest -dc EventosVivoContext --relativeFolderPath Controllers --useDefaultLayout
+-- dotnet aspnet-codegenerator controller -name GuestsController -m Guest -dc EventosVivoContext --relativeFolderPath Controllers --useDefaultLayout
 -- 
