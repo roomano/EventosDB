@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EnventosDB.MVC.Data;
+namespace EventosDB.MVC.Data;
 
 public partial class Guest
 {
@@ -16,4 +16,8 @@ public partial class Guest
     public DateTime? UpdatedAt { get; set; }
 
     public DateTime? DeletedAt { get; set; }
+
+    public int GuestTypeId { get; set; }
+
+    public virtual GuestType GuestType { get; set; } = null!;
 }

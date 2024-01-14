@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using EnventosDB.MVC.Data;
+using EventosDB.MVC.Data;
 
-namespace EnventosDB.MVC.Controllers
+namespace EventosDB.MVC.Controllers
 {
     public class GuestsController : Controller
     {
@@ -21,9 +21,8 @@ namespace EnventosDB.MVC.Controllers
         // GET: Guests
         public async Task<IActionResult> Index()
         {
-              return _context.Guests != null ? 
-                          View(await _context.Guests.ToListAsync()) :
-                          Problem("Entity set 'EventosVivoContext.Guests'  is null.");
+            var eventosVivoContext = _context.Guests.Include(g => g.GuestType);
+            return View(await eventosVivoContext.ToListAsync());
         }
 
         // GET: Guests/Details/5
@@ -35,6 +34,7 @@ namespace EnventosDB.MVC.Controllers
             }
 
             var guest = await _context.Guests
+                .Include(g => g.GuestType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (guest == null)
             {
@@ -47,6 +47,7 @@ namespace EnventosDB.MVC.Controllers
         // GET: Guests/Create
         public IActionResult Create()
         {
+            ViewData["GuestTypeId"] = new SelectList(_context.GuestTypes, "Id", "Id");
             return View();
         }
 
@@ -55,7 +56,7 @@ namespace EnventosDB.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,GuestName,Contact,CreatedAt,UpdatedAt,DeletedAt")] Guest guest)
+        public async Task<IActionResult> Create([Bind("Id,GuestName,Contact,CreatedAt,UpdatedAt,DeletedAt,GuestTypeId")] Guest guest)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +64,7 @@ namespace EnventosDB.MVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GuestTypeId"] = new SelectList(_context.GuestTypes, "Id", "Id", guest.GuestTypeId);
             return View(guest);
         }
 
@@ -79,6 +81,7 @@ namespace EnventosDB.MVC.Controllers
             {
                 return NotFound();
             }
+            ViewData["GuestTypeId"] = new SelectList(_context.GuestTypes, "Id", "Id", guest.GuestTypeId);
             return View(guest);
         }
 
@@ -87,7 +90,7 @@ namespace EnventosDB.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,GuestName,Contact,CreatedAt,UpdatedAt,DeletedAt")] Guest guest)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,GuestName,Contact,CreatedAt,UpdatedAt,DeletedAt,GuestTypeId")] Guest guest)
         {
             if (id != guest.Id)
             {
@@ -98,7 +101,6 @@ namespace EnventosDB.MVC.Controllers
             {
                 try
                 {
-                    guest.UpdatedAt = DateTime.Now;
                     _context.Update(guest);
                     await _context.SaveChangesAsync();
                 }
@@ -115,6 +117,7 @@ namespace EnventosDB.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GuestTypeId"] = new SelectList(_context.GuestTypes, "Id", "Id", guest.GuestTypeId);
             return View(guest);
         }
 
@@ -127,6 +130,7 @@ namespace EnventosDB.MVC.Controllers
             }
 
             var guest = await _context.Guests
+                .Include(g => g.GuestType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (guest == null)
             {

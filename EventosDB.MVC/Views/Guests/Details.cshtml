@@ -1,4 +1,4 @@
-@model EnventosDB.MVC.Data.Guest
+﻿@model EventosDB.MVC.Data.Guest
 
 @{
     ViewData["Title"] = "Details";
@@ -39,6 +39,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DeletedAt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GuestType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GuestType.Id)
         </dd>
     </dl>
 </div>

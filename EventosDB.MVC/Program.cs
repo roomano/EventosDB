@@ -1,4 +1,4 @@
-using EnventosDB.MVC.Data;
+using EventosDB.MVC.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
