@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnventosDB.MVC", "EnventosDB.MVC\EnventosDB.MVC.csproj", "{F150CD50-916F-49F0-9D89-056F74F88012}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventosDB.MVC", "EventosDB.MVC\EventosDB.MVC.csproj", "{EF6EEB73-A972-45CE-95FE-8C8632B883A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F150CD50-916F-49F0-9D89-056F74F88012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F150CD50-916F-49F0-9D89-056F74F88012}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F150CD50-916F-49F0-9D89-056F74F88012}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F150CD50-916F-49F0-9D89-056F74F88012}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF6EEB73-A972-45CE-95FE-8C8632B883A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF6EEB73-A972-45CE-95FE-8C8632B883A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF6EEB73-A972-45CE-95FE-8C8632B883A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF6EEB73-A972-45CE-95FE-8C8632B883A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
